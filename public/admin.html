@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | QuickBook</title>
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-950 min-h-screen text-gray-100">
+    <!-- Header -->
+    <header class="border-b border-slate-800/50 backdrop-blur-md bg-slate-950/80 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">QuickBook</h1>
+                <p class="text-sm text-slate-400">Admin Panel</p>
+            </div>
+            <a href="index.html" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-2">
+                <span>← Back to Booking</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- Tab Navigation -->
+        <div class="flex gap-2 mb-8 border-b border-slate-800">
+            <button id="tab-dashboard" class="tab-btn active" onclick="showTab('dashboard')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+                Dashboard
+            </button>
+            <button id="tab-calendar" class="tab-btn" onclick="showTab('calendar')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                Calendar
+            </button>
+            <button id="tab-appointments" class="tab-btn" onclick="showTab('appointments')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                All Appointments
+            </button>
+            <button id="tab-services" class="tab-btn" onclick="showTab('services')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                Services
+            </button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="panel-dashboard" class="tab-panel">
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-sm mb-1">Today</p>
+                            <p id="stat-today" class="text-3xl font-bold text-white">-</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-sm mb-1">This Week</p>
+                            <p id="stat-week" class="text-3xl font-bold text-cyan-400">-</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-sm mb-1">Total Bookings</p>
+                            <p id="stat-total" class="text-3xl font-bold text-white">-</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-400 text-sm mb-1">Revenue</p>
+                            <p id="stat-revenue" class="text-3xl font-bold text-green-400">-</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <!-- Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Weekly Bookings Chart -->
+    <div class="glass-card p-6">
+        <h3 class="text-lg font-semibold mb-4">Weekly Bookings</h3>
+        <canvas id="weeklyChart" height="200"></canvas>
+    </div>
+    <!-- Service Popularity Chart -->
+    <div class="glass-card p-6">
+        <h3 class="text-lg font-semibold mb-4">Popular Services</h3>
+        <canvas id="servicesChart" height="200"></canvas>
+    </div>
+</div>
+
+            <!-- Today's Schedule -->
+            <div class="glass-card p-6">
+                <h3 class="text-lg font-semibold mb-4">Today's Schedule</h3>
+                <div id="today-schedule" class="space-y-3">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Tab -->
+        <div id="panel-calendar" class="tab-panel hidden">
+            <div class="glass-card p-6">
+                <!-- Calendar Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <button id="prev-month" class="p-2 hover:bg-slate-800 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <h3 id="calendar-month" class="text-xl font-semibold"></h3>
+                    <button id="next-month" class="p-2 hover:bg-slate-800 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Calendar Grid -->
+                <div class="grid grid-cols-7 gap-1 mb-2">
+                    <div class="text-center text-slate-400 text-sm py-2">Sun</div>
+                    <div class="text-center text-slate-400 text-sm py-2">Mon</div>
+                    <div class="text-center text-slate-400 text-sm py-2">Tue</div>
+                    <div class="text-center text-slate-400 text-sm py-2">Wed</div>
+                    <div class="text-center text-slate-400 text-sm py-2">Thu</div>
+                    <div class="text-center text-slate-400 text-sm py-2">Fri</div>
+                    <div class="text-center text-slate-400 text-sm py-2">Sat</div>
+                </div>
+                <div id="calendar-grid" class="grid grid-cols-7 gap-1">
+                    <!-- Calendar days loaded by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Selected Day Appointments -->
+            <div id="day-appointments" class="glass-card p-6 mt-6 hidden">
+                <h3 id="selected-day-title" class="text-lg font-semibold mb-4"></h3>
+                <div id="selected-day-list" class="space-y-3">
+                    <!-- Appointments for selected day -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments Tab -->
+        <div id="panel-appointments" class="tab-panel hidden">
+            <!-- Filter -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">All Appointments</h2>
+                <select id="filter-status" class="bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-cyan-500">
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+
+            <!-- Appointments Table -->
+            <div class="glass-card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-slate-800/50">
+                            <tr>
+                                <th class="text-left p-4 text-slate-400 font-medium">Customer</th>
+                                <th class="text-left p-4 text-slate-400 font-medium">Service</th>
+                                <th class="text-left p-4 text-slate-400 font-medium">Date & Time</th>
+                                <th class="text-left p-4 text-slate-400 font-medium">Status</th>
+                                <th class="text-left p-4 text-slate-400 font-medium">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments-table">
+                            <!-- Appointments loaded by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Empty State -->
+                <div id="empty-state" class="hidden p-12 text-center">
+                    <svg class="w-16 h-16 text-slate-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <p class="text-slate-400">No appointments found</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Tab -->
+        <div id="panel-services" class="tab-panel hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Manage Services</h2>
+                <button id="btn-add-service" class="btn-primary flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Add Service
+                </button>
+            </div>
+
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Services loaded by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="glass-card p-8 max-w-md mx-4">
+            <h3 class="text-xl font-bold mb-4">Cancel Appointment</h3>
+            <p class="text-slate-400 mb-6">Are you sure you want to cancel this appointment? This action cannot be undone.</p>
+            <div class="flex gap-4">
+                <button id="modal-cancel" class="flex-1 py-3 rounded-xl border border-slate-700 text-slate-400 hover:bg-slate-800 transition-colors">
+                    Go Back
+                </button>
+                <button id="modal-confirm" class="flex-1 py-3 rounded-xl bg-red-500/20 text-red-400 border border-red-500/50 hover:bg-red-500/30 transition-colors">
+                    Cancel Appointment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Modal -->
+    <div id="service-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="glass-card p-8 max-w-md mx-4 w-full">
+            <h3 id="service-modal-title" class="text-xl font-bold mb-6">Add Service</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm text-slate-400 mb-2">Service Name</label>
+                    <input type="text" id="service-name" placeholder="e.g. Haircut" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-2">Duration (minutes)</label>
+                    <input type="number" id="service-duration" placeholder="30" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-2">Price (£)</label>
+                    <input type="number" step="0.01" id="service-price" placeholder="15.00" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500">
+                </div>
+            </div>
+            <div class="flex gap-4 mt-6">
+                <button id="service-modal-cancel" class="flex-1 py-3 rounded-xl border border-slate-700 text-slate-400 hover:bg-slate-800 transition-colors">
+                    Cancel
+                </button>
+                <button id="service-modal-save" class="flex-1 btn-primary">
+                    Save Service
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

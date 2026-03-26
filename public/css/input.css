@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* Glass card effect */
+    .glass-card {
+        @apply bg-slate-800/30 backdrop-blur-md border border-slate-700/50 rounded-2xl;
+    }
+
+    /* Service card */
+    .service-card {
+        @apply glass-card p-6 cursor-pointer transition-all duration-300 hover:border-cyan-500/50 hover:bg-slate-800/50 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1;
+    }
+
+    .service-card.selected {
+        @apply border-cyan-500 bg-slate-800/60 shadow-lg shadow-cyan-500/20;
+    }
+
+    /* Time slot */
+    .time-slot {
+        @apply px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-center cursor-pointer transition-all duration-200 hover:border-cyan-500/50 hover:bg-slate-800;
+    }
+
+    .time-slot.selected {
+        @apply bg-gradient-to-r from-cyan-500 to-blue-500 border-transparent text-white font-medium;
+    }
+
+    .time-slot.unavailable {
+        @apply bg-slate-800/20 text-slate-600 cursor-not-allowed border-slate-800 hover:border-slate-800 hover:bg-slate-800/20;
+    }
+
+    /* Primary button */
+    .btn-primary {
+        @apply bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-4 px-8 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02] active:scale-[0.98];
+    }
+
+    /* Progress steps */
+    .progress-step {
+        @apply flex flex-col items-center;
+    }
+
+    .progress-step .step-number {
+        @apply w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 font-medium transition-all duration-300;
+    }
+
+    .progress-step .step-label {
+        @apply text-xs text-slate-500 mt-2 transition-all duration-300;
+    }
+
+    .progress-step.active .step-number {
+        @apply bg-gradient-to-r from-cyan-500 to-blue-500 border-transparent text-white;
+    }
+
+    .progress-step.active .step-label {
+        @apply text-cyan-400;
+    }
+
+    .progress-step.completed .step-number {
+        @apply bg-cyan-500/20 border-cyan-500 text-cyan-400;
+    }
+
+    .step-line {
+        @apply w-16 h-px bg-slate-700 mx-2;
+    }
+
+    /* Step sections */
+    .step-section {
+        @apply transition-all duration-500;
+    }
+
+    /* Glow effect for inputs on focus */
+    input:focus {
+        @apply shadow-lg shadow-cyan-500/10;
+    }
+
+    /* Tab buttons */
+    .tab-btn {
+        @apply flex items-center gap-2 px-4 py-3 text-slate-400 border-b-2 border-transparent transition-all duration-200 hover:text-white;
+    }
+
+    .tab-btn.active {
+        @apply text-cyan-400 border-cyan-400;
+    }
+
+    /* Calendar styles */
+    .calendar-day {
+        @apply p-2 min-h-[80px] rounded-xl border border-slate-800 cursor-pointer transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/30 relative;
+    }
+
+    .calendar-day .day-number {
+        @apply text-sm text-slate-400;
+    }
+
+    .calendar-day.today {
+        @apply border-cyan-500/50 bg-cyan-500/10;
+    }
+
+    .calendar-day.today .day-number {
+        @apply text-cyan-400 font-semibold;
+    }
+
+    .calendar-day.selected {
+        @apply border-cyan-500 bg-cyan-500/20;
+    }
+
+    .calendar-day.has-appointments .appointment-count {
+        @apply absolute bottom-2 right-2 w-6 h-6 bg-cyan-500 text-white text-xs rounded-full flex items-center justify-center font-medium;
+    }
+
+    /* Chart containers - FIXED HEIGHT */
+    #weeklyChart {
+        max-height: 250px !important;
+        height: 250px !important;
+    }
+
+    #servicesChart {
+        max-height: 250px !important;
+        height: 250px !important;
+    }
+}

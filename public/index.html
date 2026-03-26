@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickBook | Appointment Booking</title>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-slate-950 min-h-screen text-gray-100">
+    <!-- Header -->
+    <header class="border-b border-slate-800/50 backdrop-blur-md bg-slate-950/80 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">QuickBook</h1>
+                <p class="text-sm text-slate-400">Smart booking for small businesses</p>
+            </div>
+            <a href="admin.html" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Admin Panel</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- Progress Steps -->
+        <div class="flex items-center justify-center mb-12">
+            <div class="flex items-center space-x-4">
+                <div id="progress-1" class="progress-step active">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Service</span>
+                </div>
+                <div class="step-line"></div>
+                <div id="progress-2" class="progress-step">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Date & Time</span>
+                </div>
+                <div class="step-line"></div>
+                <div id="progress-3" class="progress-step">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Details</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Select Service -->
+        <section id="step-service" class="step-section">
+            <h2 class="text-3xl font-bold text-center mb-2">Choose Your Service</h2>
+            <p class="text-slate-400 text-center mb-8">Select the service you'd like to book</p>
+            <div id="services-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Services loaded by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Step 2: Select Date and Time -->
+        <section id="step-datetime" class="step-section hidden">
+            <h2 class="text-3xl font-bold text-center mb-2">Pick a Date & Time</h2>
+            <p class="text-slate-400 text-center mb-8">Choose when you'd like to come in</p>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="glass-card p-6 mb-6">
+                    <label for="date" class="block text-sm text-slate-400 mb-2">Select Date</label>
+                    <input type="date" id="date" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
+                </div>
+                
+                <div class="glass-card p-6">
+                    <label class="block text-sm text-slate-400 mb-4">Available Time Slots</label>
+                    <div id="time-slots" class="grid grid-cols-3 md:grid-cols-4 gap-3">
+                        <!-- Time slots loaded by JavaScript -->
+                    </div>
+                </div>
+                
+                <button id="btn-back-service" class="mt-6 text-slate-400 hover:text-white transition-colors">
+                    ← Back to services
+                </button>
+            </div>
+        </section>
+
+        <!-- Step 3: Customer Details -->
+        <section id="step-details" class="step-section hidden">
+            <h2 class="text-3xl font-bold text-center mb-2">Almost There!</h2>
+            <p class="text-slate-400 text-center mb-8">Enter your details to confirm the booking</p>
+            
+            <div class="max-w-md mx-auto">
+                <div class="glass-card p-8">
+                    <div class="mb-6">
+                        <label for="name" class="block text-sm text-slate-400 mb-2">Your Name</label>
+                        <input type="text" id="name" placeholder="John Doe" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
+                    </div>
+                    <div class="mb-8">
+                        <label for="phone" class="block text-sm text-slate-400 mb-2">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+44 7123 456789" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
+                    </div>
+                    
+                    <!-- Booking Summary -->
+                    <div class="border-t border-slate-700 pt-6 mb-6">
+                        <h3 class="text-sm text-slate-400 mb-3">Booking Summary</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Service</span>
+                                <span id="summary-service" class="text-white font-medium">-</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Date</span>
+                                <span id="summary-date" class="text-white font-medium">-</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Time</span>
+                                <span id="summary-time" class="text-white font-medium">-</span>
+                            </div>
+                            <div class="flex justify-between pt-2 border-t border-slate-700">
+                                <span class="text-slate-400">Price</span>
+                                <span id="summary-price" class="text-cyan-400 font-bold text-lg">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="confirm-booking" class="btn-primary w-full">
+                        Confirm Booking
+                    </button>
+                </div>
+                
+                <button id="btn-back-datetime" class="mt-6 text-slate-400 hover:text-white transition-colors">
+                    ← Back to date & time
+                </button>
+            </div>
+        </section>
+
+        <!-- Success Message -->
+        <section id="step-success" class="step-section hidden">
+            <div class="text-center">
+                <div class="w-20 h-20 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-2">Booking Confirmed!</h2>
+                <p class="text-slate-400 mb-8">We've received your appointment request</p>
+                
+                <div class="glass-card p-6 max-w-md mx-auto mb-8">
+                    <div class="space-y-3 text-left">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Service</span>
+                            <span id="confirm-service" class="text-white">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Date</span>
+                            <span id="confirm-date" class="text-white">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Time</span>
+                            <span id="confirm-time" class="text-white">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="btn-new-booking" class="btn-primary">
+                    Book Another Appointment
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/50 mt-auto">
+        <div class="container mx-auto px-6 py-6 text-center text-slate-500 text-sm">
+            <p>© 2026 QuickBook — Final Year Project</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
