@@ -61,7 +61,7 @@
     }
 
     .step-line {
-        @apply w-16 h-px bg-slate-700 mx-2;
+        @apply w-8 md:w-16 h-px bg-slate-700 mx-1 md:mx-2;
     }
 
     /* Step sections */
@@ -74,22 +74,27 @@
         @apply shadow-lg shadow-cyan-500/10;
     }
 
-    /* Tab buttons */
+    /* Tab buttons - mobile responsive */
     .tab-btn {
-        @apply flex items-center gap-2 px-4 py-3 text-slate-400 border-b-2 border-transparent transition-all duration-200 hover:text-white;
+        @apply flex items-center gap-1 md:gap-2 px-3 md:px-6 py-3 text-slate-400 border-b-2 border-transparent transition-all duration-200 hover:text-white whitespace-nowrap text-sm md:text-base;
     }
 
     .tab-btn.active {
         @apply text-cyan-400 border-cyan-400;
     }
 
+    /* Hide tab text on mobile, show only icons */
+    .tab-btn span {
+        @apply hidden md:inline;
+    }
+
     /* Calendar styles */
     .calendar-day {
-        @apply p-2 min-h-[80px] rounded-xl border border-slate-800 cursor-pointer transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/30 relative;
+        @apply p-1 md:p-3 min-h-[50px] md:min-h-[80px] rounded-lg md:rounded-xl border border-slate-800 cursor-pointer transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/30 relative flex flex-col;
     }
 
     .calendar-day .day-number {
-        @apply text-sm text-slate-400;
+        @apply text-xs md:text-sm text-slate-400;
     }
 
     .calendar-day.today {
@@ -105,17 +110,40 @@
     }
 
     .calendar-day.has-appointments .appointment-count {
-        @apply absolute bottom-2 right-2 w-6 h-6 bg-cyan-500 text-white text-xs rounded-full flex items-center justify-center font-medium;
+        @apply absolute bottom-1 right-1 md:bottom-2 md:right-2 w-5 h-5 md:w-6 md:h-6 bg-cyan-500 text-white text-xs rounded-full flex items-center justify-center font-medium;
     }
 
-    /* Chart containers - FIXED HEIGHT */
-    #weeklyChart {
-        max-height: 250px !important;
-        height: 250px !important;
+    /* Calendar grid */
+    #calendar-grid {
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr) !important;
+        gap: 0.25rem;
     }
 
-    #servicesChart {
-        max-height: 250px !important;
-        height: 250px !important;
+    /* Mobile table wrapper */
+    .table-wrapper {
+        @apply overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0;
+    }
+}
+
+/* Additional mobile styles */
+@media (max-width: 640px) {
+    /* Stats grid on mobile */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    /* Charts stack on mobile */
+    .charts-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Smaller text on mobile */
+    h1 {
+        font-size: 1.25rem !important;
+    }
+    
+    h2 {
+        font-size: 1.125rem !important;
     }
 }
