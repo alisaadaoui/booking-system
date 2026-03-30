@@ -3,284 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel | QuickBook</title>
+    <title>BookFlow | Admin Panel</title>
     <link href="css/styles.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="css/admin-theme.css" rel="stylesheet">
 </head>
-<body class="bg-slate-950 min-h-screen text-gray-100">
-    <!-- Header -->
-    <header class="border-b border-slate-800/50 backdrop-blur-md bg-slate-950/80 sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">QuickBook</h1>
-                <p class="text-sm text-slate-400">Admin Panel</p>
-            </div>
-            <a href="index.html" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-2">
-                <span>← Back to Booking</span>
-            </a>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-6 py-8">
-        <!-- Tab Navigation -->
-        <div class="flex gap-1 md:gap-2 mb-8 border-b border-slate-800 overflow-x-auto">
-            <button id="tab-dashboard" class="tab-btn active" onclick="showTab('dashboard')">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                </svg>
-                <span>Dashboard</span>
-            </button>
-            <button id="tab-calendar" class="tab-btn" onclick="showTab('calendar')">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span>Calendar</span>
-            </button>
-            <button id="tab-appointments" class="tab-btn" onclick="showTab('appointments')">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                </svg>
-                <span>Appointments</span>
-            </button>
-            <button id="tab-services" class="tab-btn" onclick="showTab('services')">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-                <span>Services</span>
-            </button>
-        </div>
-
-        <!-- Dashboard Tab -->
-        <div id="panel-dashboard" class="tab-panel">
-            <!-- Stats Overview -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 stats-grid">
-                    <div class="glass-card p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-slate-400 text-sm mb-1">Today</p>
-                            <p id="stat-today" class="text-3xl font-bold text-white">-</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
+<body class="bg-gray-50 min-h-screen">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-gray-900">BookFlow</h1>
+                        <p class="text-xs text-gray-500">Appointment Manager</p>
                     </div>
                 </div>
-                <div class="glass-card p-6">
-                    <div class="flex items-center justify-between">
+            </div>
+            
+            <nav class="p-4 space-y-1">
+                <button onclick="showSection('dashboard')" id="nav-dashboard" class="nav-item active">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                    </svg>
+                    <span>Dashboard</span>
+                </button>
+                <button onclick="showSection('appointments')" id="nav-appointments" class="nav-item">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>Appointments</span>
+                </button>
+                <button onclick="showSection('services')" id="nav-services" class="nav-item">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path>
+                    </svg>
+                    <span>Services</span>
+                </button>
+                <button onclick="showSection('clients')" id="nav-clients" class="nav-item">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <span>Clients</span>
+                </button>
+            </nav>
+
+            <div class="mt-auto p-4 border-t border-gray-200">
+                <a href="index.html" class="nav-item text-gray-500 hover:text-purple-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    <span>Back to Booking</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+            <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-gray-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <span class="font-bold text-gray-900">BookFlow</span>
+            </div>
+            <div class="w-10"></div>
+        </div>
+
+        <!-- Mobile Overlay -->
+        <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- ========== THE DASHBOARD ========== -->
+            <section id="section-dashboard" class="section">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Dashboard</h1>
+                        <p class="section-subtitle" id="current-date"></p>
+                    </div>
+                    <button onclick="showNewBookingModal()" class="btn-primary">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        New Booking
+                    </button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
                         <div>
-                            <p class="text-slate-400 text-sm mb-1">This Week</p>
-                            <p id="stat-week" class="text-3xl font-bold text-cyan-400">-</p>
+                            <p class="stat-label">Today</p>
+                            <p class="stat-value" id="stat-today">0</p>
+                            <p class="stat-sublabel">appointments</p>
                         </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="stat-icon bg-purple-100">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                         </div>
                     </div>
-                </div>
-                <div class="glass-card p-6">
-                    <div class="flex items-center justify-between">
+                    <div class="stat-card">
                         <div>
-                            <p class="text-slate-400 text-sm mb-1">Total Bookings</p>
-                            <p id="stat-total" class="text-3xl font-bold text-white">-</p>
+                            <p class="stat-label">This Week</p>
+                            <p class="stat-value" style="color:#7c3aed;" id="stat-week">0</p>
+                            <p class="stat-sublabel">appointments</p>
                         </div>
-                        <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <div class="stat-icon bg-blue-100">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                             </svg>
                         </div>
                     </div>
-                </div>
-                <div class="glass-card p-6">
-                    <div class="flex items-center justify-between">
+                    <div class="stat-card">
                         <div>
-                            <p class="text-slate-400 text-sm mb-1">Revenue</p>
-                            <p id="stat-revenue" class="text-3xl font-bold text-green-400">-</p>
+                            <p class="stat-label">Revenue</p>
+                            <p class="stat-value" style="color:#10b981;" id="stat-revenue">£0</p>
+                            <p class="stat-sublabel">this month</p>
                         </div>
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="stat-icon bg-green-100">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
                     </div>
+                    <div class="stat-card">
+                        <div>
+                            <p class="stat-label">Clients</p>
+                            <p class="stat-value" id="stat-clients">0</p>
+                            <p class="stat-sublabel">total</p>
+                        </div>
+                        <div class="stat-icon bg-orange-100">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-        <!-- Charts Row -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 charts-grid">
-    <div class="glass-card p-6">
-        <h3 class="text-lg font-semibold mb-4">Weekly Bookings</h3>
-        <div class="h-64">
-            <canvas id="weeklyChart"></canvas>
-        </div>
-    </div>
-    <div class="glass-card p-6">
-        <h3 class="text-lg font-semibold mb-4">Popular Services</h3>
-        <div class="h-64">
-            <canvas id="servicesChart"></canvas>
-        </div>
-    </div>
-</div>
-
-            <!-- Today's Schedule -->
-            <div class="glass-card p-6">
-                <h3 class="text-lg font-semibold mb-4">Today's Schedule</h3>
-                <div id="today-schedule" class="space-y-3">
-                    <!-- Loaded by JavaScript -->
+                <!-- Today's Schedule -->
+                <div class="card">
+                    <h2 class="card-title">Today's Schedule</h2>
+                    <div id="today-schedule">
+                        <!-- Loaded by JS -->
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- Calendar Tab -->
-        <div id="panel-calendar" class="tab-panel hidden">
-            <div class="glass-card p-6">
-                <!-- Calendar Header -->
-                <div class="flex items-center justify-between mb-6">
-                    <button id="prev-month" class="p-2 hover:bg-slate-800 rounded-lg transition-colors">
+            <!-- ========== APPOINTMENTS ========== -->
+            <section id="section-appointments" class="section hidden">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Appointments</h1>
+                        <p class="section-subtitle"><span id="total-appointments">0</span> total appointments</p>
+                    </div>
+                    <button onclick="showNewBookingModal()" class="btn-primary">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                    </button>
-                    <h3 id="calendar-month" class="text-xl font-semibold"></h3>
-                    <button id="next-month" class="p-2 hover:bg-slate-800 rounded-lg transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
+                        New Booking
                     </button>
                 </div>
-                <!-- Calendar Grid -->
-                <div class="grid grid-cols-7 gap-1 mb-2">
-                    <div class="text-center text-slate-400 text-sm py-2">Sun</div>
-                    <div class="text-center text-slate-400 text-sm py-2">Mon</div>
-                    <div class="text-center text-slate-400 text-sm py-2">Tue</div>
-                    <div class="text-center text-slate-400 text-sm py-2">Wed</div>
-                    <div class="text-center text-slate-400 text-sm py-2">Thu</div>
-                    <div class="text-center text-slate-400 text-sm py-2">Fri</div>
-                    <div class="text-center text-slate-400 text-sm py-2">Sat</div>
+
+                <!-- Weekly Calendar -->
+                <div class="card mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <button onclick="prevWeek()" class="p-2 hover:bg-gray-100 rounded-lg" style="border:none;background:none;cursor:pointer;">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <h3 style="font-weight:600;color:#111827;" id="week-range"></h3>
+                        <button onclick="nextWeek()" class="p-2 hover:bg-gray-100 rounded-lg" style="border:none;background:none;cursor:pointer;">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="week-calendar" id="week-calendar"></div>
                 </div>
-                <div id="calendar-grid" class="grid grid-cols-7 gap-1">
-                    <!-- Calendar days loaded by JavaScript -->
+
+                <!-- Search and Filter -->
+                <div class="filter-bar">
+                    <input type="text" id="search-appointments" placeholder="Search client or service..." class="input-field" style="flex:1;">
+                    <select id="filter-status" class="input-field" style="width:180px;">
+                        <option value="all">All Status</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
                 </div>
-            </div>
 
-            <!-- Selected Day Appointments -->
-            <div id="day-appointments" class="glass-card p-6 mt-6 hidden">
-                <h3 id="selected-day-title" class="text-lg font-semibold mb-4"></h3>
-                <div id="selected-day-list" class="space-y-3">
-                    <!-- Appointments for selected day -->
+                <!-- Appointments List -->
+                <div id="appointments-list" class="grid-3"></div>
+            </section>
+
+            <!-- ========== SERVICES ========== -->
+            <section id="section-services" class="section hidden">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Services</h1>
+                        <p class="section-subtitle">Manage your service offerings</p>
+                    </div>
+                    <button onclick="showServiceModal()" class="btn-primary">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add Service
+                    </button>
                 </div>
-            </div>
-        </div>
 
-        <!-- Appointments Tab -->
-        <div id="panel-appointments" class="tab-panel hidden">
-            <!-- Filter -->
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold">All Appointments</h2>
-                <select id="filter-status" class="bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-cyan-500">
-                    <option value="all">All Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="confirmed">Confirmed</option>
-                    <option value="cancelled">Cancelled</option>
-                </select>
-            </div>
+                <div id="services-list" class="grid-3"></div>
+            </section>
 
-            <!-- Desktop Table (hidden on mobile) -->
-            <div class="glass-card overflow-hidden hidden md:block">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-slate-800/50">
-                            <tr>
-                                <th class="text-left p-4 text-slate-400 font-medium">Customer</th>
-                                <th class="text-left p-4 text-slate-400 font-medium">Service</th>
-                                <th class="text-left p-4 text-slate-400 font-medium">Date & Time</th>
-                                <th class="text-left p-4 text-slate-400 font-medium">Status</th>
-                                <th class="text-left p-4 text-slate-400 font-medium">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="appointments-table">
-                            <!-- Appointments loaded by JavaScript -->
-                        </tbody>
-                    </table>
+            <!-- ========== CLIENTS ========== -->
+            <section id="section-clients" class="section hidden">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Clients</h1>
+                        <p class="section-subtitle"><span id="total-clients">0</span> clients</p>
+                    </div>
+                    <button onclick="showClientModal()" class="btn-primary">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add Client
+                    </button>
                 </div>
-            </div>
 
-            <!-- Mobile Cards (hidden on desktop) -->
-            <div id="appointments-cards" class="space-y-4 md:hidden">
-                <!-- Appointments loaded by JavaScript -->
-            </div>
-            
-            <!-- Empty State -->
-            <div id="empty-state" class="hidden p-12 text-center glass-card">
-                <svg class="w-16 h-16 text-slate-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <p class="text-slate-400">No appointments found</p>
-            </div>
-        </div>
+                <div style="margin-bottom:24px;">
+                    <input type="text" id="search-clients" placeholder="Search clients..." class="input-field" style="max-width:400px;">
+                </div>
 
+                <div id="clients-list" class="grid-3"></div>
+            </section>
+        </main>
+    </div>
 
-        <!-- Services Tab -->
-        <div id="panel-services" class="tab-panel hidden">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold">Manage Services</h2>
-                <button id="btn-add-service" class="btn-primary flex items-center gap-2">
+    <!-- ========== BOOKING MODAL ========== -->
+    <div id="booking-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width:480px;">
+            <div class="modal-header">
+                <h2>New Booking</h2>
+                <button onclick="hideBookingModal()" class="modal-close">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
-                    Add Service
                 </button>
             </div>
-
-            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Services loaded by JavaScript -->
-            </div>
-        </div>
-    </main>
-
-    <!-- Delete Confirmation Modal -->
-    <div id="delete-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="glass-card p-8 max-w-md mx-4">
-            <h3 class="text-xl font-bold mb-4">Cancel Appointment</h3>
-            <p class="text-slate-400 mb-6">Are you sure you want to cancel this appointment? This action cannot be undone.</p>
-            <div class="flex gap-4">
-                <button id="modal-cancel" class="flex-1 py-3 rounded-xl border border-slate-700 text-slate-400 hover:bg-slate-800 transition-colors">
-                    Go Back
-                </button>
-                <button id="modal-confirm" class="flex-1 py-3 rounded-xl bg-red-500/20 text-red-400 border border-red-500/50 hover:bg-red-500/30 transition-colors">
-                    Cancel Appointment
-                </button>
-            </div>
+            <form id="booking-form" class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Client</label>
+                    <select id="booking-client" class="input-field" onchange="handleClientSelect(this)">
+                        <option value="">+ New Client</option>
+                    </select>
+                </div>
+                <div id="new-client-fields">
+                    <div class="form-group">
+                        <label class="form-label">Client Name *</label>
+                        <input type="text" id="booking-name" class="input-field" placeholder="Enter client name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number *</label>
+                        <input type="tel" id="booking-phone" class="input-field" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="booking-email" class="input-field" placeholder="Enter email (optional)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Service *</label>
+                    <select id="booking-service" required class="input-field">
+                        <option value="">Select a service</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Date *</label>
+                        <input type="date" id="booking-date" required class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Time *</label>
+                        <select id="booking-time" required class="input-field">
+                            <option value="">Select time</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="hideBookingModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Booking</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Service Modal -->
-    <div id="service-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="glass-card p-8 max-w-md mx-4 w-full">
-            <h3 id="service-modal-title" class="text-xl font-bold mb-6">Add Service</h3>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm text-slate-400 mb-2">Service Name</label>
-                    <input type="text" id="service-name" placeholder="e.g. Haircut" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500">
-                </div>
-                <div>
-                    <label class="block text-sm text-slate-400 mb-2">Duration (minutes)</label>
-                    <input type="number" id="service-duration" placeholder="30" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500">
-                </div>
-                <div>
-                    <label class="block text-sm text-slate-400 mb-2">Price (£)</label>
-                    <input type="number" step="0.01" id="service-price" placeholder="15.00" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500">
-                </div>
+    <!-- ========== SERVICE MODAL ========== -->
+    <div id="service-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width:480px;">
+            <div class="modal-header">
+                <h2 id="service-modal-title">Add Service</h2>
+                <button onclick="hideServiceModal()" class="modal-close">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            <div class="flex gap-4 mt-6">
-                <button id="service-modal-cancel" class="flex-1 py-3 rounded-xl border border-slate-700 text-slate-400 hover:bg-slate-800 transition-colors">
-                    Cancel
+            <form id="service-form" class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Service Name *</label>
+                    <input type="text" id="service-name" required class="input-field" placeholder="e.g. Haircut">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <input type="text" id="service-description" class="input-field" placeholder="Brief description">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Duration (mins) *</label>
+                        <input type="number" id="service-duration" required class="input-field" placeholder="30">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Price (£) *</label>
+                        <input type="number" step="0.01" id="service-price" required class="input-field" placeholder="15.00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Color</label>
+                    <div class="color-picker" id="color-picker">
+                        <button type="button" class="color-option" style="background:#10b981;" data-color="green"></button>
+                        <button type="button" class="color-option" style="background:#3b82f6;" data-color="blue"></button>
+                        <button type="button" class="color-option" style="background:#ef4444;" data-color="red"></button>
+                        <button type="button" class="color-option" style="background:#8b5cf6;" data-color="purple"></button>
+                        <button type="button" class="color-option" style="background:#f97316;" data-color="orange"></button>
+                        <button type="button" class="color-option" style="background:#ec4899;" data-color="pink"></button>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="hideServiceModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Service</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== CLIENT MODAL ========== -->
+    <div id="client-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width:480px;">
+            <div class="modal-header">
+                <h2 id="client-modal-title">Add Client</h2>
+                <button onclick="hideClientModal()" class="modal-close">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
-                <button id="service-modal-save" class="flex-1 btn-primary">
-                    Save Service
-                </button>
+            </div>
+            <form id="client-form" class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" id="client-name" required class="input-field" placeholder="Enter full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="client-email" class="input-field" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number *</label>
+                    <input type="tel" id="client-phone" required class="input-field" placeholder="Enter phone number">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="hideClientModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Client</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== CONFIRM MODAL ========== -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width:380px;">
+            <h2 id="confirm-title" style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:8px;">Confirm Action</h2>
+            <p id="confirm-message" style="color:#6b7280;margin-bottom:24px;"></p>
+            <div class="modal-actions">
+                <button onclick="hideConfirmModal()" class="btn-secondary">Cancel</button>
+                <button id="confirm-action" class="btn-danger">Confirm</button>
             </div>
         </div>
     </div>

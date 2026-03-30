@@ -27,13 +27,13 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Create new service
+// Create service
 router.post('/', async (req, res) => {
     try {
-        const { name, duration, price } = req.body;
+        const { name, description, duration, price, color } = req.body;
         const [result] = await pool.query(
-            'INSERT INTO services (name, duration, price) VALUES (?, ?, ?)',
-            [name, duration, price]
+            'INSERT INTO services (name, description, duration, price, color) VALUES (?, ?, ?, ?, ?)',
+            [name, description || null, duration, price, color || 'blue']
         );
         res.status(201).json({ id: result.insertId, message: 'Service created successfully' });
     } catch (error) {
@@ -45,10 +45,10 @@ router.post('/', async (req, res) => {
 // Update service
 router.put('/:id', async (req, res) => {
     try {
-        const { name, duration, price } = req.body;
+        const { name, description, duration, price, color } = req.body;
         const [result] = await pool.query(
-            'UPDATE services SET name = ?, duration = ?, price = ? WHERE id = ?',
-            [name, duration, price, req.params.id]
+            'UPDATE services SET name = ?, description = ?, duration = ?, price = ?, color = ? WHERE id = ?',
+            [name, description || null, duration, price, color || 'blue', req.params.id]
         );
         if (result.affectedRows === 0) {
             return res.status(404).json({ error: 'Service not found' });
