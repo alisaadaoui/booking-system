@@ -3,167 +3,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickBook | Appointment Booking</title>
-    <link href="css/styles.css" rel="stylesheet">
+    <title>BookFlow - Appointment Booking Made Simple</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8f7ff 0%, #ffffff 100%);
+            color: #111827;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 48px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #7c3aed;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 24px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #374151;
+            margin-bottom: 32px;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #7c3aed;
+            border-radius: 50%;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+
+        .hero-title span {
+            color: #7c3aed;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 1rem;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 32px 24px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.1);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: #f3f4f6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            color: #7c3aed;
+        }
+
+        .feature-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            font-size: 0.9375rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cta-box {
+            background: #7c3aed;
+            border-radius: 32px;
+            padding: 80px 48px;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .cta-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 32px;
+        }
+
+        .btn-white {
+            background: white;
+            color: #374151;
+            padding: 16px 32px;
+            font-size: 1rem;
+        }
+
+        .btn-white:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 48px 24px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #7c3aed;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-icon svg {
+            width: 18px;
+            height: 18px;
+            color: white;
+        }
+
+        .footer-logo-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 16px 20px;
+            }
+
+            .header-buttons {
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.8125rem;
+            }
+
+            .hero {
+                padding: 60px 20px 40px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-box {
+                padding: 48px 24px;
+            }
+
+            .cta-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-large {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
-<body class="bg-slate-950 min-h-screen text-gray-100">
+<body>
     <!-- Header -->
-    <header class="border-b border-slate-800/50 backdrop-blur-md bg-slate-950/80 sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">QuickBook</h1>
-                <p class="text-sm text-slate-400">Smart booking for small businesses</p>
+    <header class="header">
+        <a href="landing.html" class="logo">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
             </div>
-            <a href="admin.html" class="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Admin Panel</a>
+            <span class="logo-text">BookFlow</span>
+        </a>
+        <div class="header-buttons">
+            <a href="admin.html" class="btn btn-secondary">Admin Panel</a>
+            <a href="booking.html" class="btn btn-primary">
+                Book Now
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
-        <!-- Progress Steps -->
-        <div class="flex items-center justify-center mb-12">
-            <div class="flex items-center space-x-4">
-                <div id="progress-1" class="progress-step active">
-                    <span class="step-number">1</span>
-                    <span class="step-label">Service</span>
-                </div>
-                <div class="step-line"></div>
-                <div id="progress-2" class="progress-step">
-                    <span class="step-number">2</span>
-                    <span class="step-label">Date & Time</span>
-                </div>
-                <div class="step-line"></div>
-                <div id="progress-3" class="progress-step">
-                    <span class="step-number">3</span>
-                    <span class="step-label">Details</span>
-                </div>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Built for small businesses
         </div>
+        <h1 class="hero-title">
+            Appointment booking,<br>
+            <span>beautifully simple.</span>
+        </h1>
+        <p class="hero-subtitle">
+            BookFlow helps small businesses manage appointments, services, 
+            and clients, all in one elegant workspace.
+        </p>
+        <div class="hero-buttons">
+            <a href="booking.html" class="btn btn-primary btn-large">
+                Book an Appointment
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+            <a href="admin.html" class="btn btn-secondary btn-large">
+                View Admin Panel
+            </a>
+        </div>
+    </section>
 
-        <!-- Step 1: Select Service -->
-        <section id="step-service" class="step-section">
-            <h2 class="text-3xl font-bold text-center mb-2">Choose Your Service</h2>
-            <p class="text-slate-400 text-center mb-8">Select the service you'd like to book</p>
-            <div id="services-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Services loaded by JavaScript -->
-            </div>
-        </section>
-
-        <!-- Step 2: Select Date and Time -->
-        <section id="step-datetime" class="step-section hidden">
-            <h2 class="text-3xl font-bold text-center mb-2">Pick a Date & Time</h2>
-            <p class="text-slate-400 text-center mb-8">Choose when you'd like to come in</p>
-            
-            <div class="max-w-2xl mx-auto">
-                <div class="glass-card p-6 mb-6">
-                    <label for="date" class="block text-sm text-slate-400 mb-2">Select Date</label>
-                    <input type="date" id="date" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
-                </div>
-                
-                <div class="glass-card p-6">
-                    <label class="block text-sm text-slate-400 mb-4">Available Time Slots</label>
-                    <div id="time-slots" class="grid grid-cols-3 md:grid-cols-4 gap-3">
-                        <!-- Time slots loaded by JavaScript -->
-                    </div>
-                </div>
-                
-                <button id="btn-back-service" class="mt-6 text-slate-400 hover:text-white transition-colors">
-                    ← Back to services
-                </button>
-            </div>
-        </section>
-
-        <!-- Step 3: Customer Details -->
-        <section id="step-details" class="step-section hidden">
-            <h2 class="text-3xl font-bold text-center mb-2">Almost There!</h2>
-            <p class="text-slate-400 text-center mb-8">Enter your details to confirm the booking</p>
-            
-            <div class="max-w-md mx-auto">
-                <div class="glass-card p-8">
-                    <div class="mb-6">
-                        <label for="name" class="block text-sm text-slate-400 mb-2">Your Name</label>
-                        <input type="text" id="name" placeholder="John Doe" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
-                    </div>
-                    <div class="mb-8">
-                        <label for="phone" class="block text-sm text-slate-400 mb-2">Phone Number</label>
-                        <input type="tel" id="phone" placeholder="+44 7123 456789" class="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
-                    </div>
-                    
-                    <!-- Booking Summary -->
-                    <div class="border-t border-slate-700 pt-6 mb-6">
-                        <h3 class="text-sm text-slate-400 mb-3">Booking Summary</h3>
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Service</span>
-                                <span id="summary-service" class="text-white font-medium">-</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Date</span>
-                                <span id="summary-date" class="text-white font-medium">-</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Time</span>
-                                <span id="summary-time" class="text-white font-medium">-</span>
-                            </div>
-                            <div class="flex justify-between pt-2 border-t border-slate-700">
-                                <span class="text-slate-400">Price</span>
-                                <span id="summary-price" class="text-cyan-400 font-bold text-lg">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button id="confirm-booking" class="btn-primary w-full">
-                        Confirm Booking
-                    </button>
-                </div>
-                
-                <button id="btn-back-datetime" class="mt-6 text-slate-400 hover:text-white transition-colors">
-                    ← Back to date & time
-                </button>
-            </div>
-        </section>
-
-        <!-- Success Message -->
-        <section id="step-success" class="step-section hidden">
-            <div class="text-center">
-                <div class="w-20 h-20 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header">
+            <h2 class="section-title">Everything you need</h2>
+            <p class="section-subtitle">No bloat. Just the tools small businesses actually use.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold mb-2">Booking Confirmed!</h2>
-                <p class="text-slate-400 mb-8">We've received your appointment request</p>
-                
-                <div class="glass-card p-6 max-w-md mx-auto mb-8">
-                    <div class="space-y-3 text-left">
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Service</span>
-                            <span id="confirm-service" class="text-white">-</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Date</span>
-                            <span id="confirm-date" class="text-white">-</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Time</span>
-                            <span id="confirm-time" class="text-white">-</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <button id="btn-new-booking" class="btn-primary">
-                    Book Another Appointment
-                </button>
+                <h3 class="feature-title">Smart Scheduling</h3>
+                <p class="feature-description">Book and manage appointments with an intuitive weekly calendar view.</p>
             </div>
-        </section>
-    </main>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Service Management</h3>
+                <p class="feature-description">Create and customize your service offerings with pricing and duration.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Client Directory</h3>
+                <p class="feature-description">Keep track of all your clients, their history, and contact information.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Status Tracking</h3>
+                <p class="feature-description">Track appointments as scheduled, completed, cancelled, or no-shows.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-box">
+            <h2 class="cta-title">Ready to streamline your bookings?</h2>
+            <p class="cta-subtitle">Start managing your appointments with BookFlow today.</p>
+            <a href="booking.html" class="btn btn-white btn-large">
+                Book Now
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800/50 mt-auto">
-        <div class="container mx-auto px-6 py-6 text-center text-slate-500 text-sm">
-            <p>© 2026 QuickBook — Final Year Project</p>
+    <footer class="footer">
+        <div class="footer-logo">
+            <div class="footer-logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </div>
+            <span class="footer-logo-text">BookFlow</span>
         </div>
+        <p class="footer-copyright">© 2025 BookFlow. All rights reserved.</p>
     </footer>
-
-    <script src="js/app.js"></script>
 </body>
 </html>
