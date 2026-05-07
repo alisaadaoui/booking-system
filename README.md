@@ -72,7 +72,7 @@ Before setting up BookFlow locally, ensure you have the following installed:
 | Git | Latest | Cloning the repository |
 | A web browser | Modern (Chrome/Firefox/Edge) | Running the application |
 
-> **Note for non-Windows users:** WAMP is Windows-only. On macOS or Linux, you can use MAMP (macOS) or set up MySQL directly. The application connects to MySQL on port 3308 by default — adjust as needed.
+> **Note for non-Windows users:** WAMP is Windows-only. On macOS or Linux, you can use MAMP (macOS) or set up MySQL directly. The application connects to MySQL on port 3308 by default, adjust as needed.
 
 ---
 
@@ -123,8 +123,10 @@ node server/server.js
 ```
 
 You should see:
+```
 Server running on http://localhost:3000
 Connected to MySQL database
+```
 
 ---
 
@@ -157,6 +159,8 @@ Full schema with foreign key relationships is shown in the **Entity-Relationship
 ---
 
 ## Project Structure
+
+```
 booking-system/
 │
 ├── public/                  # Frontend files (served statically)
@@ -179,6 +183,7 @@ booking-system/
 │
 ├── package.json             # npm dependencies
 └── README.md                # This file
+```
 
 ---
 
