@@ -96,8 +96,8 @@ npm install
 1. Start WAMP and ensure MySQL is running on **port 3308**.
 2. Open phpMyAdmin (typically at `http://localhost:8080/phpmyadmin`).
 3. Create a new database named `booking_system`.
-4. Import the SQL schema located at `database/schema.sql` (if available), or run the CREATE TABLE statements provided in **Appendix C** of the dissertation.
-
+4. Import the SQL schema located at `schema.sql` in the root of the repository. This file contains both the table structure and sample seed data, so the system is ready to use immediately after import.
+   
 ### 4. Configure Database Connection (if needed)
 
 If your MySQL setup uses different credentials, update the connection details in `server/db.js`:
@@ -146,13 +146,14 @@ Once the server is running, the system is accessible at:
 
 ## Database Schema
 
-BookFlow uses three core tables:
+BookFlow uses four tables:
 
 | Table | Purpose |
-|---|---|
+| --- | --- |
 | `services` | Stores business offerings (name, description, duration, price, colour) |
 | `clients` | Stores customer contact details for client-list management |
 | `appointments` | Central entity linking services, clients, dates, times, and status |
+| `business_hours` | Stores opening and closing times per day of the week |
 
 Full schema with foreign key relationships is shown in the **Entity-Relationship Diagram (Figure 4.2)** of the dissertation.
 
@@ -179,7 +180,7 @@ booking-system/
 │   ├── controllers/         # Business logic
 │   └── db.js                # MySQL connection pool
 │
-├── database/                # Database schema and seed files
+├── schema.sql               # MySQL database schema and seed data
 │
 ├── package.json             # npm dependencies
 └── README.md                # This file
